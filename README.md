@@ -16,7 +16,7 @@ A Flask-based API for managing a library system. The project allows an admin to 
   pip install -r requirements.txt
 3. Set up the database and run migrations:
   flask db upgrade
-4. Run the application
+4. Run the application:
   python run.py
 
 You can adjust any details or add more information based on your specific app features.
