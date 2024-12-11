@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h3 class="text-center">Hi dear {{name}} </h3>
+        <h1 class="text-center text-primary mb-4">Your Borrowed Books</h1>
+        
+        {% if borrowed_books %}
+            <div class="list-group">
+                {% for book in borrowed_books %}
+                    <div class="list-group-item list-group-item-action mb-3">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-1 text-dark">{{ book.title }}</h5>
+                            <small class="text-muted">Author: {{ book.author.name }}</small>
+                        </div>
+                        <p class="mb-1">Borrowed on: <strong>{{ book.borrowing_date }}</strong></p>
+                        
+                        {% if book.return_date %}
+                            <p class="mb-1">Returned on: <strong>{{ book.return_date }}</strong></p>
+                        {% else %}
+                            <form action="{{ url_for('books_bp.return_book', book_id=book.id) }}" method="POST">
+                                <button type="submit" class="btn btn-warning btn-sm mt-2">Return Book</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info text-center" role="alert">
+                You have not borrowed any books yet.
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+    
