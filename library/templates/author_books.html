@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+    {{author.name}}
+    {% if books %}
+    <ul>
+    {% for book in books %}
+        <li>{{ book.title }}</li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No books available for this author.</p>
+    {% endif %}
+    <br>
+    <a href="{{ url_for('authors_bp.authors') }}">Back to Authors</a>
+{% endblock%}
