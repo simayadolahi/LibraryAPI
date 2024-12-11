@@ -3,9 +3,10 @@
 A Flask-based API for managing a library system. The project allows an admin to add and edit books and authors, while users can borrow books. It uses SQLAlchemy for the database and Flask-Login for user authentication.
 
 ## Features:
-- Admin can add and edit books and authors.
-- Users can browse and borrow books.
-- Integrated with SQLAlchemy and Flask-Login.
+- Admins can manage books and authors.
+- Users can borrow books.
+- Secure user authentication with login and registration.
+- Easily extensible with Flask Blueprints for modularity.
 
 ## Installation:
 1. Clone the repository:
