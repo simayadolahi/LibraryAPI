@@ -4,21 +4,21 @@ This project is a Library Management System built using Flask, a micro web frame
 
 - Admin Functionalities:
 
-Add, edit, and delete books.
+  Add, edit, and delete books.
 
-Add, edit, and delete authors.
+  Add, edit, and delete authors.
 
 - User Functionalities:
 
-View available books.
+  View available books.
 
-Borrow books.
+  Borrow books.
 
 - API Functionalities:
 
-Provides RESTful APIs for books and authors.
+  Provides RESTful APIs for books and authors.
 
-Allows programmatic access to manage library resources.
+  Allows programmatic access to manage library resources.
 
 ### Flask Extensions:
 
@@ -34,56 +34,41 @@ Allows programmatic access to manage library resources.
 
 ## Project Setup
 
-Prerequisites
+### Prerequisites
 
-Python 3.11 or later
+- Python 3.11 or later
 
-A virtual environment is recommended to manage dependencies.
+- A virtual environment is recommended to manage dependencies.
 
-Installation Steps
+#### Installation Steps
 
-Clone the repository:
+- Clone the repository:
 
-git clone https://github.com/simayadolahi/LibraryAPI.git
-cd LibraryAPI
+  git clone https://github.com/simayadolahi/LibraryAPI.git
+  cd LibraryAPI
 
-Create and activate a virtual environment:
-
-python -m venv venv
-source venv/bin/activate   # On Windows: venv\Scripts\activate
-
-Install the required dependencies:
-
-pip install -r requirements.txt
-
-Run database migrations:
-
-flask db upgrade
-
-Start the application:
-
-flask run
+- Create and activate a virtual environment:
+  python -m venv venv
+  source venv/bin/activate   # On Windows: venv\Scripts\activate
+- Install the required dependencies:
+  pip install -r requirements.txt
+- Run database migrations
+  flask db upgrade
+- Start the application:
+  flask run
 
 The application will be available at http://127.0.0.1:5000/.
 
-API Endpoints
+### API Endpoints
 
-Base URL
-
-http://127.0.0.1:5000/api/
-
-Books Endpoints
-
-Get All Books
-
+- Base URL
+ http://127.0.0.1:5000/api/
+- Books Endpoints
+#### Get All Books
 Method: GET
-
 URL: /books
-
 Description: Retrieve all books in the library.
-
 Response Example:
-
 [
     {
         "id": 1,
@@ -98,39 +83,29 @@ Response Example:
         "available": false
     }
 ]
-
-Add a New Book
-
+#### Add a New Book
 Method: POST
-
 URL: /books
-
 Description: Add a new book to the library.
-
-Request Body Example:
-
+- Request Body Example:
 {
     "title": "New Book Title",
     "author": "Author Name",
     "available": true
 }
 
-Response Example:
-
+- Response Example:
 {
     "message": "Book added successfully.",
     "book_id": 3
 }
 
-Edit a Book
-
+#### Edit a Book
 Method: PUT
-
 URL: /books/{id}
-
 Description: Update details of an existing book.
 
-Request Body Example:
+- Request Body Example:
 
 {
     "title": "Updated Title",
@@ -138,38 +113,29 @@ Request Body Example:
     "available": false
 }
 
-Response Example:
+- Response Example:
 
 {
     "message": "Book updated successfully."
 }
 
-Delete a Book
-
+#### Delete a Book
 Method: DELETE
-
 URL: /books/{id}
-
 Description: Delete a book by its ID.
 
-Response Example:
+- Response Example:
 
 {
     "message": "Book deleted successfully."
 }
 
-Authors Endpoints
-
-Get All Authors
-
+- Authors Endpoints
+#### Get All Authors
 Method: GET
-
 URL: /authors
-
 Description: Retrieve all authors in the library.
-
 Response Example:
-
 [
     {
         "id": 1,
@@ -181,28 +147,25 @@ Response Example:
     }
 ]
 
-Add a New Author
-
+#### Add a New Author
 Method: POST
-
 URL: /authors
-
 Description: Add a new author to the library.
 
-Request Body Example:
+- Request Body Example:
 
 {
     "name": "J.K. Rowling"
 }
 
-Response Example:
+- Response Example:
 
 {
     "message": "Author added successfully.",
     "author_id": 3
 }
 
-Application Structure
+## Application Structure
 
 /templates/: HTML templates for front-end views.
 
@@ -214,21 +177,6 @@ Application Structure
 
 run.py: Entry point for running the application.
 
-Future Improvements
-
-Implement advanced search and filter functionalities.
-
-Add role-based access control (RBAC).
-
-Integrate unit tests for API endpoints.
-
-Deploy the application on a cloud platform.
-
-Contributions
-
 Contributions are welcome! Feel free to fork this repository, make your changes, and submit a pull request.
 
-License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
 
