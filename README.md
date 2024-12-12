@@ -65,7 +65,7 @@ The application will be available at http://127.0.0.1:5000/.
 
 - Base URL
  http://127.0.0.1:5000/api/
-- Books Endpoints
+### Books Endpoints
 #### Get All Books
 Method: GET
 URL: /books
@@ -132,7 +132,7 @@ Description: Delete a book by its ID.
     "message": "Book deleted successfully."
 }
 
-- Authors Endpoints
+### Authors Endpoints
 #### Get All Authors
 Method: GET
 URL: /authors
