@@ -49,12 +49,14 @@ This project is a Library Management System built using Flask, a micro web frame
 
 - Create and activate a virtual environment:
   python -m venv venv
+  
   source venv/bin/activate   # On Windows: venv\Scripts\activate
-- Install the required dependencies:
+  
+- Install the required dependencies: 
   pip install -r requirements.txt
-- Run database migrations
+- Run database migrations: 
   flask db upgrade
-- Start the application:
+- Start the application: 
   flask run
 
 The application will be available at http://127.0.0.1:5000/.
