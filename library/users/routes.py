@@ -11,27 +11,65 @@ from library.users.utils import admin_required
 
 users_bp = Blueprint('users_bp', __name__)
 
-
 @users_bp.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
+
     form = RegistrationForm()
+
     if form.validate_on_submit():
+        # Check if email is already registered
         existing_user = UserModel.query.filter_by(email=form.email.data).first()
         if existing_user:
             flash('Email is already registered.', 'danger')
             return redirect(url_for('users_bp.register'))
+
+    form = RegistrationForm()
+    
+    if form.validate_on_submit():
+        # Check if email is already registered
+        existing_user = UserModel.query.filter_by(email=form.email.data).first()
+        if existing_user:
+            flash('Email is already registered.', 'danger')
+            return redirect(url_for('users_bp.register'))
+        
+        # Check if passwords match
+        if form.password.data != form.confirm_password.data:
+            flash('Passwords do not match. Please try again.', 'danger')
+            return redirect(url_for('users_bp.register'))
+        
+        # Check password length
+        if len(form.password.data) < 6:
+            flash('Password must be at least 6 characters long.', 'danger')
+            return redirect(url_for('users_bp.register'))
+        
+        # Check if username already exists
+        existing_name = UserModel.query.filter_by(name=form.name.data).first()
+        if existing_name:
+            flash('Username is already taken.', 'danger')
+            return redirect(url_for('users_bp.register'))
+        
+        # Check username length
+        if len(form.name.data) < 3:
+            flash('Username must be at least 3 characters long.', 'danger')
+            return redirect(url_for('users_bp.register'))
+        
+        # Create new user
         new_user = UserModel(
             name=form.name.data,
             email=form.email.data,
         )
         new_user.set_password(form.password.data)
+        
         db.session.add(new_user)
         db.session.commit()
+        
         flash('Registration successful! You can now log in.', 'success')
         return redirect(url_for('users_bp.login'))
-    return render_template('register.html',title='Register' ,form=form)
+    
+    return render_template('register.html', title='Register', form=form)
+
 
 
 @users_bp.route("/login", methods=["GET", "POST"])
