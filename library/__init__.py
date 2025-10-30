@@ -15,12 +15,13 @@ login_manager.login_message_category = 'info'
 
 def create_app(config_class=Config):
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
+    
     db.init_app(app)
-    migrate.init_app(app,db)
+    migrate.init_app(app, db)
     login_manager.init_app(app)
     
-
+    # Register blueprints
     from library.users.routes import users_bp
     from library.books.routes import books_bp
     from library.main.routes import main_bp
@@ -29,7 +30,6 @@ def create_app(config_class=Config):
     from library.users.users_api import users_api
     from library.books.books_api import books_api
     from library.authors.authors_api import authors_api
-
 
     app.register_blueprint(users_bp)
     app.register_blueprint(books_bp)
@@ -40,7 +40,8 @@ def create_app(config_class=Config):
     app.register_blueprint(books_api, url_prefix='/api')
     app.register_blueprint(authors_api, url_prefix='/api')
 
+    # ← Add this block to auto-create tables if they don't exist
+    with app.app_context():
+        db.create_all()
 
     return app
-
-
