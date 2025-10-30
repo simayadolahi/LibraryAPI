@@ -16,3 +16,5 @@ env/
 
 # Ignore log files
 *.log
+# Ignore environment variables file
+.env

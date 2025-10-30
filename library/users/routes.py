@@ -8,6 +8,7 @@ from library.authors.forms import AuthorForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from library.users.utils import admin_required
+from sqlalchemy.exc import IntegrityError
 
 users_bp = Blueprint('users_bp', __name__)
 
@@ -21,6 +22,19 @@ def register():
         existing_user = UserModel.query.filter_by(email=form.email.data).first()
         if existing_user:
             flash('Email is already registered.', 'danger')
+            return redirect(url_for('users_bp.register'))
+        if form.password.data != form.confirm_password.data:
+            flash('Passwords do not match. Please try again.', 'danger')
+            return redirect(url_for('users_bp.register'))
+        if len(form.password.data) < 6:
+            flash('Password must be at least 6 characters long.', 'danger')
+            return redirect(url_for('users_bp.register'))
+        existing_name = UserModel.query.filter_by(name=form.name.data).first()
+        if existing_name:
+            flash('Username is already taken.', 'danger')
+            return redirect(url_for('users_bp.register'))
+        if len(form.name.data) < 3:
+            flash('Username must be at least 3 characters long.', 'danger')
             return redirect(url_for('users_bp.register'))
         new_user = UserModel(
             name=form.name.data,
